@@ -1,0 +1,34 @@
+#PYTHON PROGRAM FOR RUN LENGTH ENCODING
+
+#determines how to abbreviate the characters if at all
+def charCount(cnt, chrc):
+    output = ""
+    if cnt > 4 and cnt < 10:
+        cnt = str(cnt)
+        output = "/0" + cnt + chrc
+    elif cnt >= 10:
+        cnt = str(cnt)
+        output = "/" + cnt + chrc
+    else:
+        for i in range(cnt):
+            output = output + chrc
+    return output
+
+#encodes the string by comparing the characters at neighboring indices
+def encode(strn):
+    count = 1
+    output = ""
+    for i in range(len(strn)):
+        if i < len(strn) -1 and strn[i] == strn[i + 1]:
+            count = count + 1
+        else:
+            output = output + charCount(count, strn[i])
+            count = 1
+    return output
+    
+#calls the encode function for the specified example strings
+print(encode("aaaaa"))
+print(encode("aaaa"))
+print(encode("abcabcabcabcabc"))
+print(encode("if(a){if(b){if(c){if(d){if(e){5 deeeeeeep}}}}}"))
+print(encode(""))
