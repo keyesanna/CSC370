@@ -1,0 +1,50 @@
+//JAVA PROGRAM FOR RUN LENGTH ENCODING
+
+public class RunLengthEncode
+{
+    //determines how to abbreviate the characters if at all
+    public static String charCount(int cnt, char chr)
+    {
+        String output = "";
+        
+        if(cnt > 4 && cnt < 10)
+            output = "/0" + cnt + chr; 
+        else if (cnt >= 10)
+            output = "/" + cnt + chr;
+        else
+        {
+            for(int i = 0; i < cnt; i++)
+                output = output + chr;
+        }
+        return output;
+    }
+    
+    //encodes the string by comparing the characters at neighboring indices
+    public static String encode(String str)
+    {
+        int count = 1;
+        String output = "";
+        
+        for(int i = 0; i < str.length(); i++)
+        {
+            if(i < str.length() -1 && str.charAt(i) == str.charAt(i + 1))
+                count++;
+            else
+            {
+                output = output + charCount(count, str.charAt(i));
+                count = 1;
+            }
+        }
+        return output;
+    }
+    
+    //calls the encode function for the specified example strings
+    public static void main(String[] args)
+    {
+        System.out.println(encode("aaaaa"));
+        System.out.println(encode("aaaa"));
+        System.out.println(encode("abcabcabcabcabc"));
+        System.out.println(encode("if(a){if(b){if(c){if(d){if(e){5 deeeeeeep}}}}}"));
+        System.out.println(encode(""));
+    }
+}
