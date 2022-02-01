@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class AccessCode
+{
+    static String permissions(int minPermissions, int [] rights)
+    {
+        String result = "";
+        
+        if(minPermissions >= 0 && minPermissions <= 100 && rights.length >= 0 && rights.length <= 50)
+        {
+            for(int i = 0; i < rights.length; i++)
+            {
+                if(rights[i] < 0 || rights[i] > 100)
+                {
+                    result = "Inputs did not meet criteria.";
+                    i = rights.length;  
+                }
+                else if(rights[i] < minPermissions)
+                    result = result + "D";
+                else
+                    result = result + "A";
+            }
+        }
+        else
+            result = "Inputs did not meet criteria.";
+        
+        return result;
+    }
+    
+    
+    public static void main(String [] args)
+    {
+        int minperm1 = 2;
+        int [] rights1 = { 0, 1, 2, 3, 4, 5};
+        System.out.println(permissions(minperm1, rights1));
+        
+        int minperm2 = 20;
+        int [] rights2 = {5, 3, 2, 10, 0};
+        System.out.println(permissions(minperm2, rights2));
+        
+        int minperm3 = 20;
+        int [] rights3 = {};
+        System.out.println(permissions(minperm3, rights3));
+        
+        int minperm4 = 49;
+        int [] rights4 = {34, 78, 9, 52, 11, 1};
+        System.out.println(permissions(minperm4, rights4));
+        
+        int minperm5 = 50;
+        int [] rights5 = {1, 11, 111};
+        System.out.println(permissions(minperm5, rights5));
+    }
+}
