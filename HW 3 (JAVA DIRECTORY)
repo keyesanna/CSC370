@@ -1,0 +1,89 @@
+
+public class Dirsort
+{
+    public static String [] lexsort(String [] dirs)
+    {
+        for(int i = 0; i < dirs.length-1; i++)
+        {
+            for(int ii = 0; ii < dirs[i].length(); ii++)
+            {
+                if(dirs[i].charAt(ii) == '/' || dirs[i].charAt(ii) > dirs[ii].charAt(ii))
+                {
+                    String temp = dirs[i];
+                    dirs[i] = dirs[ii];
+                    dirs[ii] = temp;
+                }
+            }
+        }
+        
+        for(int i = 0; i < dirs.length; i++)
+        {
+            System.out.print(dirs[i]);
+        }
+        return dirs;
+    }
+    
+    public static String [] depthsort(int [] slasharr, String [] dirs)
+    {
+        for(int i = 1; i < slasharr.length; i++)
+        {
+            int tempslash = slasharr[i];
+            String tempdir = dirs[i];
+            int ii = i;
+            while(ii > 0 && slasharr[ii-1] >= tempslash)
+            {
+                slasharr[ii] = slasharr[ii-1];
+                dirs[ii] = dirs[ii-1];
+                ii--;
+            }
+            slasharr[ii] = tempslash;
+            dirs[ii] = tempdir;
+        }
+        
+        lexsort(dirs);
+        
+        return dirs;
+    }
+    
+    public static String [] dirsort(String [] dirs)
+    {
+        int [] slasharr = new int [dirs.length];
+        
+        for(int i = 0; i < dirs.length; i++)
+        {
+            int slashcount = 0;
+            for(int ii = 0; ii < dirs[i].length(); ii++)
+            {
+                if(dirs[i].charAt(ii) == '/')
+                {
+                    slashcount++;
+                }
+            }
+            slasharr[i] = slashcount;
+        }
+        
+        dirs = depthsort(slasharr, dirs);
+        return dirs;
+    }
+    
+    public static void main (String [] args)
+    {
+        String [] dirsa = {"/","/usr/","/usr/local/","/usr/local/bin/","/games/","/games/snake/","/homework/","/temp/downloads/"};
+        dirsort(dirsa);
+        
+        String [] dirsb = {"/usr/","/usr/local/","/bin/","/usr/local/bin/","/usr/bin/","/bin/local/","/bin/local/"};
+        dirsort(dirsb);
+        
+        String [] dirsc = {"/","/a/","/b/","/c/","/d/","/e/","/f/","/g/"};
+        dirsort(dirsc);
+        
+        String [] dirsd = {"/","/a/","/b/","/c/","/d/","/e/","/f/","/g/","/a/a/","/b/g/c/","/g/f/"};
+        dirsort(dirsd);
+        
+        String [] dirse = {"/a/b/c/d/e/f/g/h/i/j/k/l/m/n/","/o/p/q/r/s/t/u/v/w/x/y/z/"};
+        dirsort(dirse);
+        
+        String [] dirsf = {"/a/b/","/ab/cd/","/c/d/","/a/b/c/","/ab/c/d/","/a/bc/d/","/a/b/cd/"};
+        dirsort(dirsf);
+    }
+}
