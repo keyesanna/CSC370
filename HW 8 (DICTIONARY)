@@ -1,0 +1,12 @@
+namenum = {}
+import random
+
+for x in range(1000):
+    chars = [chr(random.randrange(97, 97 + 26)), chr(random.randrange(97, 97 + 26)), chr(random.randrange(97, 97 + 26))]
+    name = ''.join(chars)
+    num = random.randint(100, 999)
+    
+    if name in namenum:
+        namenum.get(name)
+    if name not in namenum:
+        namenum[name] = num
