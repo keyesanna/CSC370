@@ -1,0 +1,12 @@
+public class JavaForLoop
+{
+     public static void main(String [] args)
+     {
+        int j = 5;
+        
+        for(int k = (j + 13)/27; k <= 10; k++)
+        {
+            int i = 3 * k - 1;
+        }
+     }
+}
